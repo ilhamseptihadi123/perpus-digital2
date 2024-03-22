@@ -27,3 +27,14 @@
     </NuxtLink>
   </div>
 </template>
+
+<style scoped>
+.cover {
+  width: 255px;
+  height: 370px;
+  box-shadow: 1px 10px 50px rgb(0, 0, 0, 0.5);
+}
+.card {
+  border: none !important;
+}
+</style>

@@ -18,15 +18,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1.</td>
-              <td>ILHAM SH</td>
-              <td>murid</td>
-              <td>XI</td>
-              <td>PPLG</td>
-              <td>4</td>
-              <td>224 februari 2024, 23.31.00</td>
-              <td>Baca</td>
+            <tr v-for="(visitor, i) in Visitors" key="i">
+              <td>{{ i + 1 }}</td>
+              <td>{{ visitor.nama }}</td>
+              <td>{{ visitor.keanggotaan.nama }}</td>
+              <td>{{ visitor.tanggal }}</td>
+              <td>{{ visitor.keperluan.nama }}</td>
             </tr>
           </tbody>
         </table>
@@ -37,3 +34,18 @@
     </NuxtLink>
   </div>
 </template>
+
+<script setup>
+const supabase = useSupabaseClient()
+
+const Visitors = ref({});
+
+const getpengunjung = async () => {
+  const { data, error } = await supabase.from("pengunjung").select(`*, keanggotaan(*), keperluan(*)`);
+  if (data) Visitors.value = data;
+};
+
+onMounted(() => {
+  getpengunjung();
+})
+</script>
